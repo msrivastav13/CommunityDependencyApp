@@ -1,0 +1,18 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true,
+            "package": "Communities Metadata Explorer",
+            "versionName": "ver 0.3",
+            "versionNumber": "0.3.0.NEXT"
+        }
+    ],
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "49.0",
+    "packageAliases": {
+        "Communities Metadata Explorer": "0HoB00000004D0tKAE",
+        "Communities Metadata Explorer@0.3.0-1": "04tB00000007E9mIAE"
+    }
+}

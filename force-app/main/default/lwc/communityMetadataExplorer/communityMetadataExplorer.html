@@ -1,0 +1,40 @@
+<template>
+    <lightning-card
+        title="Select Community To View Related Metadata"
+        icon-name="utility:opened_folder"
+        variant="narrow"
+    >
+        <lightning-button
+            label="Export CSV"
+            onclick={handleFileDownload}
+            slot="actions"
+        ></lightning-button>
+        <lightning-layout horizontal-align="center" vertical-align="center">
+            <lightning-layout-item class="slds-align-middle">
+                <lightning-combobox
+                    class="slds-align-middle slds-text-align_left"
+                    options={searchOptions}
+                    value={selectedCommunityId}
+                    onchange={handleOptionChange}
+                    label="Select Community to view related Metadata"
+                >
+                </lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    <div if:true={startSpinning} class="slds-is-relative">
+        <lightning-spinner alternative-text="Fetching Results...">
+        </lightning-spinner>
+    </div>
+    <lightning-layout horizontal-align="center" vertical-align="center">
+        <lightning-layout-item class="slds-align-middle">
+                <lightning-datatable
+                    key-field="MetadataComponentName"
+                    columns={columns}
+                    data={gridData}
+                    hide-checkbox-column="true"
+                >
+                </lightning-datatable>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
