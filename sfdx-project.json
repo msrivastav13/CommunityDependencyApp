@@ -4,8 +4,8 @@
             "path": "force-app",
             "default": true,
             "package": "Communities Metadata Explorer",
-            "versionName": "ver 0.3",
-            "versionNumber": "0.3.0.NEXT"
+            "versionName": "ver 0.4",
+            "versionNumber": "0.4.0.NEXT"
         }
     ],
     "namespace": "",
@@ -13,6 +13,7 @@
     "sourceApiVersion": "49.0",
     "packageAliases": {
         "Communities Metadata Explorer": "0HoB00000004D0tKAE",
-        "Communities Metadata Explorer@0.3.0-1": "04tB00000007E9mIAE"
+        "Communities Metadata Explorer@0.3.0-1": "04tB00000007E9mIAE",
+        "Communities Metadata Explorer@0.4.0-1": "04tB00000007EA1IAM"
     }
 }

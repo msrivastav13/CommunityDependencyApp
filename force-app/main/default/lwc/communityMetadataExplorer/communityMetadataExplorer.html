@@ -5,10 +5,16 @@
         variant="narrow"
     >
         <lightning-button
+            label="Export Package XML"
+            onclick={handleXmlDownload}
+            slot="actions"
+        ></lightning-button>
+        <lightning-button
             label="Export CSV"
             onclick={handleFileDownload}
             slot="actions"
         ></lightning-button>
+
         <lightning-layout horizontal-align="center" vertical-align="center">
             <lightning-layout-item class="slds-align-middle">
                 <lightning-combobox
@@ -28,13 +34,13 @@
     </div>
     <lightning-layout horizontal-align="center" vertical-align="center">
         <lightning-layout-item class="slds-align-middle">
-                <lightning-datatable
-                    key-field="MetadataComponentName"
-                    columns={columns}
-                    data={gridData}
-                    hide-checkbox-column="true"
-                >
-                </lightning-datatable>
+            <lightning-datatable
+                key-field="MetadataComponentName"
+                columns={columns}
+                data={gridData}
+                hide-checkbox-column="true"
+            >
+            </lightning-datatable>
         </lightning-layout-item>
     </lightning-layout>
 </template>

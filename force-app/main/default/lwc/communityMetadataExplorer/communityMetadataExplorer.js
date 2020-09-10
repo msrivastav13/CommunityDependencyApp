@@ -1,6 +1,7 @@
 import { LightningElement, track, wire } from 'lwc';
 import fetchSites from '@salesforce/apex/MetadataDependencyController.getSites';
 import fetchComponentDependency from '@salesforce/apex/MetadataDependencyController.getMetadataComponentDependency';
+import {createpackagexml} from 'c/packageXmlGenerator';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export const COLUMNS_DEFINITION = [
@@ -80,7 +81,9 @@ export default class CommunityMetadataExplorer extends LightningElement {
         if(this.gridData) {
             let csvContent = "data:text/csv;charset=utf-8,";
             this.gridData.forEach(function(rowArray) {
-                let row = rowArray.MetadataComponentName+","+rowArray.RefMetadataComponentType+","+rowArray.RefMetadataComponentName+",";
+                let row = rowArray.MetadataComponentName + "," + 
+                          rowArray.RefMetadataComponentType + "," + 
+                          rowArray.RefMetadataComponentName + ",";
                 csvContent += row + "\r\n";
             });
             const encodedUri = encodeURI(csvContent);
@@ -90,5 +93,14 @@ export default class CommunityMetadataExplorer extends LightningElement {
             document.body.appendChild(link); 
             link.click();
         }
+    }
+
+    handleXmlDownload() {
+        const packagexml = createpackagexml(this.gridData);
+        const link = document.createElement('a');
+        link.download = 'package.xml';
+        const blob = new Blob([packagexml], {type: 'text/plain'});
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
     }
 }
