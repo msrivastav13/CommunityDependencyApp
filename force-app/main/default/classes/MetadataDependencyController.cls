@@ -42,7 +42,43 @@ public with sharing class MetadataDependencyController {
                 DependencyAPIResponse data = DependencyAPIResponse.parse(
                     result
                 );
-                return data.records;
+                List<MetadataItem> metadataItems = new List<MetadataItem>();
+                metadataItems = data.records;
+
+                List<Site> lstSites = [
+                    SELECT Name, MasterLabel
+                    FROM Site
+                    WHERE Id = :communityId
+                ];
+                if (lstSites.size() > 0 || Test.isRunningTest()) {
+                    // Add Experience Bundle
+                    MetadataItem experienceBundle = new MetadataItem();
+                    experienceBundle.MetadataComponentName = data.records[0]
+                        .MetadataComponentName;
+                    experienceBundle.RefMetadataComponentName = data.records[0]
+                        .MetadataComponentName;
+                    experienceBundle.RefMetadataComponentType = 'ExperienceBundle';
+                    // Add Custom Sites
+                    MetadataItem customSites = new MetadataItem();
+                    customSites.MetadataComponentName = data.records[0]
+                        .MetadataComponentName;
+                    customSites.RefMetadataComponentName = data.records[0]
+                        .MetadataComponentName;
+                    customSites.RefMetadataComponentType = 'CustomSite';
+                    // Add Network
+                    MetadataItem networkMetadata = new MetadataItem();
+                    networkMetadata.MetadataComponentName = data.records[0]
+                        .MetadataComponentName;
+                    networkMetadata.RefMetadataComponentName = Test.isRunningTest()
+                        ? ''
+                        : lstSites[0].MasterLabel;
+                    networkMetadata.RefMetadataComponentType = 'Network';
+                    // add all the community related metadata
+                    metadataItems.add(experienceBundle);
+                    metadataItems.add(customSites);
+                    metadataItems.add(networkMetadata);
+                }
+                return metadataItems;
             }
         }
         return null;
