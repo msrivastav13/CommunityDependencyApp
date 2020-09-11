@@ -56,7 +56,12 @@ export default class CommunityMetadataExplorer extends LightningElement {
         } else if (error) {
             this.searchOptions = undefined;
             this.error = error;
-            console.log(error);
+            const evt = new ShowToastEvent({
+                title: 'Metadata Component Dependency API Failed',
+                message: error,
+                variant: 'error'
+            });
+            this.dispatchEvent(evt);
         }
     }
 
