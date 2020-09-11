@@ -52,11 +52,12 @@ public with sharing class MetadataDependencyController {
                     WHERE Id = :communityId
                 ];
                 if (lstSites.size() > 0 || Test.isRunningTest()) {
+                    String MasterLabel = lstSites.size() > 0 ? lstSites[0].MasterLabel : '';
                     List<Site> lstChatterSites = [
                         SELECT Name, MasterLabel
                         FROM Site
                         WHERE
-                            MasterLabel = :lstSites[0].MasterLabel
+                            MasterLabel =: MasterLabel
                             AND SiteType = 'ChatterNetwork'
                     ];
                     // Add Experience Bundle
