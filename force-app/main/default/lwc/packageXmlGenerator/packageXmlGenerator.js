@@ -49,7 +49,6 @@ const createpackagexml = (results) => {
         results,
         (result) => result.RefMetadataComponentType
     );
-    console.log(metadataResults);
     for (let [key, metadataitems] of metadataResults) {
         metadataxml += startType();
         for (let i = 0; i < metadataitems.length; i++) {

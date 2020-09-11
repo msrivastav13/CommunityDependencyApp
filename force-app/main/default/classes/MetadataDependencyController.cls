@@ -32,7 +32,8 @@ public with sharing class MetadataDependencyController {
                 'MetadataComponentType,' +
                 'RefMetadataComponentName,' +
                 'RefMetadataComponentType,' +
-                'RefMetadataComponentNamespace ' +
+                'RefMetadataComponentNamespace,' +
+                'RefMetadataComponentId ' +
                 'FROM MetadataComponentDependency ' +
                 'WHERE MetadataComponentId=\'' +
                 communityId +
@@ -51,6 +52,13 @@ public with sharing class MetadataDependencyController {
                     WHERE Id = :communityId
                 ];
                 if (lstSites.size() > 0 || Test.isRunningTest()) {
+                    List<Site> lstChatterSites = [
+                        SELECT Name, MasterLabel
+                        FROM Site
+                        WHERE
+                            MasterLabel = :lstSites[0].MasterLabel
+                            AND SiteType = 'ChatterNetwork'
+                    ];
                     // Add Experience Bundle
                     MetadataItem experienceBundle = new MetadataItem();
                     experienceBundle.MetadataComponentName = data.records[0]
@@ -62,8 +70,10 @@ public with sharing class MetadataDependencyController {
                     MetadataItem customSites = new MetadataItem();
                     customSites.MetadataComponentName = data.records[0]
                         .MetadataComponentName;
-                    customSites.RefMetadataComponentName = data.records[0]
-                        .MetadataComponentName;
+                    customSites.RefMetadataComponentName = lstChatterSites.size() >
+                        0
+                        ? lstChatterSites[0].Name
+                        : '';
                     customSites.RefMetadataComponentType = 'CustomSite';
                     // Add Network
                     MetadataItem networkMetadata = new MetadataItem();

@@ -8,19 +8,24 @@ export const COLUMNS_DEFINITION = [
     {
          type: 'text',
          fieldName: 'MetadataComponentName',
-         label: 'Metadata Name',
+         label: 'Top Level Metadata Name',
          initialWidth: 300,
      },
      {
-         type: 'text',
-         fieldName: 'RefMetadataComponentType',
-         label: 'Ref Metadata Type',
-     },
+        type: 'text',
+        fieldName: 'RefMetadataComponentName',
+        label: 'Referenced Metadata Name',
+    },
      {
          type: 'text',
-         fieldName: 'RefMetadataComponentName',
-         label: 'Reference Metadata Name',
+         fieldName: 'RefMetadataComponentType',
+         label: 'Referenced Metadata Type',
      },
+     {
+        type: 'text',
+        fieldName: 'RefMetadataComponentId',
+        label: 'Referenced Metadata Component Id',
+    }
  ];
 
 export default class CommunityMetadataExplorer extends LightningElement {
